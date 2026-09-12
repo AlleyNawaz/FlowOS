@@ -32,6 +32,10 @@
     "category": "Productivity",
     "shortDescription": "Your private digital command center",
     "longDescription": "FlowOS helps you find local files and move through digital work from one command center.",
+    "macOS": {
+      "minimumSystemVersion": "10.15",
+      "signingIdentity": "-"
+    },
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
