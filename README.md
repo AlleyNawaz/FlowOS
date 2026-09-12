@@ -17,7 +17,7 @@ For a browser-only UI preview:
 npm run dev
 ```
 
-The browser preview uses representative search results because browsers cannot inspect local files. The Tauri application searches the current user's Documents, Desktop, and Downloads folders.
+Browsers cannot inspect local files, so the browser preview displays the interface and an explicit desktop-runtime error when a search is submitted. The Tauri application performs real searches across the current user's Documents, Desktop, and Downloads folders.
 
 ## Validate it
 
@@ -34,4 +34,3 @@ cargo test --manifest-path src-tauri/Cargo.toml
 - Any future action that changes files or external systems must present a preview and require explicit confirmation.
 
 Architecture, product decisions, and milestones live in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/PRODUCT.md](docs/PRODUCT.md), and [docs/ROADMAP.md](docs/ROADMAP.md).
-

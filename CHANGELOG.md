@@ -16,3 +16,5 @@ All notable user-visible changes to FlowOS will be documented here. Versions fol
 - Local filesystem search now executes outside the Tauri command thread.
 - Natural-language search treats recency words as ranking intent instead of required filename text.
 - Upgraded Vitest past the affected path-traversal range and removed the unused jsdom dependency.
+- Removed fabricated browser search results, static activity, and unfinished navigation from the product interface.
+- Search requests now ignore stale responses when a newer command has been submitted.

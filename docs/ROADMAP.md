@@ -10,7 +10,7 @@ Status: implemented in this repository.
 - Bounded local filename and path search across visible folders.
 - Ranked results with open and reveal actions.
 - Local preferences and recents.
-- Honest capability states for assistant, automation, and memory.
+- Explicit command-response states for unsupported assistant intents; unfinished automation and memory modules stay out of navigation.
 - Native and frontend tests, build checks, and architecture documentation.
 
 Exit criteria: a user can install the app, choose visible search roots, find a local file from an inexact phrase, and open it without any filename or content leaving the device.
@@ -49,4 +49,3 @@ Exit criteria: independent security assessment, documented disaster recovery, en
 ## Product learning cadence
 
 Each milestone ships to a small cohort first. Instrument only events needed to measure activation, retrieval success, latency, action completion, and trust controls; never collect file names, queries, or document contents by default. A capability advances when usage and qualitative evidence support it, not because it appeared in the original feature list.
-

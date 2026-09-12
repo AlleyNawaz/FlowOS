@@ -1,4 +1,4 @@
-export type View = "home" | "search" | "assistant" | "recents" | "automations" | "memory" | "settings";
+export type View = "home" | "search" | "assistant" | "recents" | "settings";
 
 export interface SearchResult {
   id: string;

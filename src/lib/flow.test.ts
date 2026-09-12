@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { classifyIntent, extractSearchTerms } from "./flow";
+import { classifyIntent, DEFAULT_PREFERENCES, extractSearchTerms, searchFiles } from "./flow";
 
 describe("command intent routing", () => {
   it("routes natural-language file discovery", () => {
@@ -15,5 +15,11 @@ describe("command intent routing", () => {
   it("treats recency words as ranking signals instead of filename terms", () => {
     expect(extractSearchTerms("Find my latest project brief")).toBe("project brief");
     expect(extractSearchTerms("show the most recent tax document")).toBe("tax");
+  });
+
+  it("does not fabricate search results outside the desktop runtime", async () => {
+    await expect(searchFiles("invoice", DEFAULT_PREFERENCES)).rejects.toThrow(
+      "Local file search requires the FlowOS desktop application.",
+    );
   });
 });

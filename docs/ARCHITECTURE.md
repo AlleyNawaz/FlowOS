@@ -23,7 +23,7 @@ Local services
 
 ### React presentation layer
 
-`src/App.tsx` owns the command center, search, assistant, recents, memory, automation, and settings surfaces. UI state is explicit and typed. Local preferences and query history use browser storage because they contain no file contents or credentials.
+`src/App.tsx` owns the command center, search, command-response, recents, and settings surfaces. UI state is explicit and typed. Local preferences and query history use browser storage because they contain no file contents or credentials. Unimplemented memory and automation modules are absent from navigation.
 
 `src/lib/flow.ts` is the frontend boundary. It classifies initial intents and invokes native operations. Browser preview behavior lives behind the same interface so visual development never leaks into the native service.
 
@@ -78,4 +78,3 @@ Memory claims require provenance and confidence. Deleting a source must cascade 
 ## Testing strategy
 
 Pure intent and query parsing logic has unit coverage in Vitest. Native normalization and ranking have Rust unit coverage. Milestone 2 adds fixture-based extractor tests, search relevance judgments, path-permission integration tests, corrupted-index recovery, and performance budgets measured against 10k, 100k, and 1m-file corpora.
-

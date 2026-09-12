@@ -10,7 +10,7 @@
 
 FlowOS is a coherent desktop alpha, not yet a production AI operating layer. Its strongest foundation is a small Tauri 2 native boundary: the webview has no generic shell or filesystem permission, searches are read-only, and open/reveal commands canonicalize paths before calling the operating system. The React interface is polished and the repository builds into a macOS application and DMG.
 
-The product currently solves one narrow job: locating files by filename or path in Documents, Desktop, and Downloads. It does not yet implement content indexing, semantic retrieval, model-backed conversation, document understanding, durable memory, automation, plugins, cloud services, authentication, encrypted secrets, product analytics, automatic updates, or production crash reporting. The interface contains clearly labelled future surfaces and browser-only demonstration results; neither should be counted as shipped functionality.
+The product currently solves one narrow job: locating files by filename or path in Documents, Desktop, and Downloads. It does not yet implement content indexing, semantic retrieval, model-backed conversation, document understanding, durable memory, automation, plugins, cloud services, authentication, encrypted secrets, product analytics, automatic updates, or production crash reporting. At the start of this review, the interface contained future-only navigation and browser demonstration results. Both were removed from production paths rather than counted as shipped functionality.
 
 Production work should preserve the existing local-first boundary while replacing query-time traversal with a durable local index. Search is the right first competitive wedge because it is frequent, measurable, and establishes the source and permission model required by AI, memory, automation, and plugins.
 
@@ -45,7 +45,7 @@ FlowOS desktop process
         ├── command center and in-window ⌘K palette
         ├── local search results
         ├── intent classification
-        ├── assistant/future-capability surfaces
+        ├── explicit command-response and unsupported-capability states
         ├── settings in localStorage
         └── query history in localStorage
 ```
@@ -92,9 +92,9 @@ The workflow is release infrastructure rather than a production release guarante
 |---|---|---|
 | P0 | The assistant is rule-based intent classification, not an AI system. | Conversation, reasoning, task execution, document understanding, and content creation claims are unsupported. |
 | P0 | Search reads directory metadata on every query and has no content or vector index. | Performance scales with filesystem size and cannot reliably meet a sub-100 ms target. Queries such as “presentation about climate research” cannot match unrelated filenames. |
-| P0 | Browser preview returns fabricated file results. | Demonstration data can be mistaken for real retrieval and conflicts with the requirement to avoid fake implementations. Remove it before any public product release. |
-| P0 | The home activity list is static demonstration content. | It misrepresents user history. Real local history should be shown or the section should be empty. |
-| P1 | Memory, automations, and plugins are navigation placeholders. | They communicate direction but provide no recurring user value. Public navigation should expose only working capabilities. |
+| Resolved | Browser preview returned fabricated file results. | The review replaced it with an explicit desktop-runtime error. No file result is now shown unless the native engine returned it. |
+| Resolved | The home activity list used static demonstration content. | The review connected it to actual on-device search history and added an honest empty state. |
+| Resolved | Memory and automations were navigation placeholders. | The review removed them from product navigation until working modules exist. |
 | P1 | No onboarding or filesystem permission education exists. | Users do not know why files may be absent, especially under macOS privacy controls. |
 | P1 | Search covers three fixed roots and excludes applications. | The launcher does not yet replace Spotlight, Alfred, or Raycast for daily invocation. |
 
@@ -288,7 +288,7 @@ Privacy-friendly analytics should use an explicit event allowlist. Do not collec
 - Maintain synchronized versions, lockfiles, deterministic `npm ci`, Rust formatting, Clippy, unit tests, and moderate-or-higher dependency audit gates.
 - Run native checks on macOS, Windows, and Linux; treat Linux as build compatibility only.
 - Produce draft tag releases with documented signing requirements.
-- Remove fabricated search/activity data and hide unfinished navigation from release builds.
+- Keep fabricated data and unfinished navigation out of release builds through regression tests and review.
 - Add typed error codes and frontend error boundaries.
 - Establish coverage reporting, with an 80% line and branch threshold for domain modules and 100% branch coverage for permission decisions.
 
@@ -379,8 +379,8 @@ A feature that cannot answer these questions should not enter implementation. Th
 
 The next implementation sequence should be:
 
-1. Remove demonstration results and static activity from production paths.
-2. Add request cancellation/stale-result protection and typed native errors.
+1. **Completed in this review:** remove demonstration results and static activity from production paths.
+2. **Partially completed:** stale search responses are discarded; typed native errors remain the next boundary change.
 3. Introduce a tested, migrated SQLite source and metadata index behind the existing `searchFiles` interface.
 4. Add explicit source onboarding and macOS permission diagnostics.
 5. Register the configurable global shortcut and measure invocation latency.

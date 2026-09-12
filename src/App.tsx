@@ -3,7 +3,6 @@ import {
   Archive,
   ArrowUp,
   Bot,
-  BrainCircuit,
   Check,
   ChevronRight,
   Clock3,
@@ -14,43 +13,32 @@ import {
   Folder,
   FolderSearch,
   Image,
-  Keyboard,
   LayoutGrid,
   LoaderCircle,
-  MessageSquareText,
   MoreHorizontal,
   Search,
   Settings,
   ShieldCheck,
   Sparkles,
-  WandSparkles,
   X,
-  Zap,
 } from "lucide-react";
 import { classifyIntent, DEFAULT_PREFERENCES, extractSearchTerms, isTauriRuntime, openFile, revealFile, searchFiles } from "./lib/flow";
 import type { HistoryItem, Preferences, SearchResult, View } from "./lib/types";
 
 const suggestions = [
   { icon: FolderSearch, label: "Find a file", prompt: "Find my latest project brief", color: "blue" },
-  { icon: FileText, label: "Summarize", prompt: "Summarize my meeting notes", color: "violet" },
-  { icon: WandSparkles, label: "Create", prompt: "Draft a project update", color: "amber" },
-  { icon: Zap, label: "Automate", prompt: "Organize my downloads folder", color: "green" },
+  { icon: Clock3, label: "Recent work", prompt: "Find recent project files", color: "violet" },
+  { icon: FileCode2, label: "Project files", prompt: "Find FlowOS project files", color: "amber" },
+  { icon: Image, label: "Images", prompt: "Find Desktop images", color: "green" },
 ] as const;
 
 const nav: { view: View; label: string; icon: typeof Search }[] = [
   { view: "home", label: "Command center", icon: LayoutGrid },
   { view: "search", label: "Search", icon: Search },
-  { view: "assistant", label: "Assistant", icon: MessageSquareText },
   { view: "recents", label: "Recents", icon: Clock3 },
-  { view: "automations", label: "Automations", icon: Zap },
-  { view: "memory", label: "Memory", icon: BrainCircuit },
 ];
 
-const starterActivity = [
-  { icon: FileText, title: "Project Northstar brief", detail: "Opened from Documents", time: "12m" },
-  { icon: Search, title: "quarterly roadmap", detail: "Search · 8 results", time: "1h" },
-  { icon: MessageSquareText, title: "Meeting follow-up", detail: "Assistant conversation", time: "Yesterday" },
-];
+const HISTORY_STORAGE_KEY = "flowos.history.v1";
 
 function App() {
   const [view, setView] = useState<View>("home");
@@ -62,15 +50,16 @@ function App() {
   const [selected, setSelected] = useState(0);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [preferences, setPreferences] = useState<Preferences>(() => loadJson("flowos.preferences", DEFAULT_PREFERENCES));
-  const [history, setHistory] = useState<HistoryItem[]>(() => loadJson("flowos.history", []));
+  const [history, setHistory] = useState<HistoryItem[]>(() => loadJson(HISTORY_STORAGE_KEY, []));
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchRequest = useRef(0);
 
   const runtime = isTauriRuntime();
   const intent = useMemo(() => classifyIntent(submittedQuery), [submittedQuery]);
 
   useEffect(() => localStorage.setItem("flowos.preferences", JSON.stringify(preferences)), [preferences]);
-  useEffect(() => localStorage.setItem("flowos.history", JSON.stringify(history)), [history]);
+  useEffect(() => localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history)), [history]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -95,6 +84,7 @@ function App() {
     setPaletteOpen(false);
     setError("");
     setSelected(0);
+    const requestId = ++searchRequest.current;
     const nextIntent = classifyIntent(clean);
 
     if (nextIntent === "search" || nextIntent === "summarize" || nextIntent === "ask") {
@@ -103,16 +93,18 @@ function App() {
       try {
         const terms = extractSearchTerms(clean) || clean;
         const response = await searchFiles(terms, preferences);
+        if (requestId !== searchRequest.current) return;
         setResults(response.results);
         setSearchMeta({ scanned: response.scanned, elapsedMs: response.elapsedMs, truncated: response.truncated });
         if (preferences.saveHistory) {
           setHistory((items) => [{ query: clean, resultCount: response.results.length, timestamp: Date.now() }, ...items.filter((item) => item.query !== clean)].slice(0, 24));
         }
       } catch (reason) {
+        if (requestId !== searchRequest.current) return;
         setError(reason instanceof Error ? reason.message : String(reason));
         setResults([]);
       } finally {
-        setLoading(false);
+        if (requestId === searchRequest.current) setLoading(false);
       }
     } else {
       setView("assistant");
@@ -145,7 +137,6 @@ function App() {
             <button key={item.view} className={`nav-item ${view === item.view ? "active" : ""}`} onClick={() => setView(item.view)}>
               <item.icon size={17} strokeWidth={1.8} />
               <span>{item.label}</span>
-              {item.view === "automations" && <span className="soon-pill">SOON</span>}
             </button>
           ))}
         </nav>
@@ -171,12 +162,10 @@ function App() {
           <div className="status"><span className="status-dot" /> {runtime ? "Local engine ready" : "Browser preview"}</div>
         </div>
 
-        {view === "home" && <Home query={query} setQuery={setQuery} runCommand={runCommand} chooseSuggestion={chooseSuggestion} />}
+        {view === "home" && <Home query={query} setQuery={setQuery} runCommand={runCommand} chooseSuggestion={chooseSuggestion} history={history} onViewAll={() => setView("recents")} />}
         {view === "search" && <SearchView query={query} setQuery={setQuery} runCommand={runCommand} submittedQuery={submittedQuery} loading={loading} results={results} selected={selected} setSelected={setSelected} searchMeta={searchMeta} error={error} />}
         {view === "assistant" && <AssistantView query={query} setQuery={setQuery} runCommand={runCommand} submittedQuery={submittedQuery} intent={intent} loading={loading} results={results} />}
         {view === "recents" && <RecentsView history={history} onRun={(value) => { setQuery(value); void runCommand(value); }} clear={() => setHistory([])} />}
-        {view === "automations" && <ComingSoon icon={Zap} title="Automations" description="Turn repeated work into reviewable workflows. FlowOS will propose each plan and ask before it changes your files or apps." />}
-        {view === "memory" && <ComingSoon icon={BrainCircuit} title="Memory, on your terms" description="A transparent place for the context FlowOS learns. Every memory will be visible, editable, and removable." />}
         {view === "settings" && <SettingsView preferences={preferences} setPreferences={setPreferences} runtime={runtime} />}
       </main>
 
@@ -194,13 +183,13 @@ function App() {
   );
 }
 
-function Home({ query, setQuery, runCommand, chooseSuggestion }: { query: string; setQuery: (value: string) => void; runCommand: (value?: string) => void; chooseSuggestion: (value: string) => void }) {
+function Home({ query, setQuery, runCommand, chooseSuggestion, history, onViewAll }: { query: string; setQuery: (value: string) => void; runCommand: (value?: string) => void; chooseSuggestion: (value: string) => void; history: HistoryItem[]; onViewAll: () => void }) {
   return (
     <div className="home-view page-enter">
       <section className="hero">
         <div className="eyebrow"><span /> YOUR DIGITAL COMMAND CENTER</div>
-        <h1>What can I help you<br /><em>flow through?</em></h1>
-        <p>Find anything. Understand everything. Move work forward.</p>
+        <h1>What do you need<br /><em>to find?</em></h1>
+        <p>Find local files quickly, without breaking your flow.</p>
         <div className="command-box">
           <div className="command-input"><Sparkles size={21} /><input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") runCommand(); }} placeholder="Search files, ask a question, or run a command…" autoFocus /><button aria-label="Run command" onClick={() => runCommand()}><ArrowUp size={18} /></button></div>
           <div className="command-hint"><span><Command size={12} /> Press <kbd>Enter</kbd> to run</span><span>Everything runs privately on your device</span></div>
@@ -216,10 +205,10 @@ function Home({ query, setQuery, runCommand, chooseSuggestion }: { query: string
         </div>
       </section>
       <section className="activity-section">
-        <div className="section-heading"><div><span className="section-kicker">PICK UP WHERE YOU LEFT OFF</span><h2>Recent activity</h2></div><button>View all <ChevronRight size={14} /></button></div>
-        <div className="activity-list">
-          {starterActivity.map((item) => <div className="activity-row" key={item.title}><span className="file-icon"><item.icon size={17} /></span><div><strong>{item.title}</strong><span>{item.detail}</span></div><time>{item.time}</time><button aria-label="More actions"><MoreHorizontal size={17} /></button></div>)}
-        </div>
+        <div className="section-heading"><div><span className="section-kicker">PICK UP WHERE YOU LEFT OFF</span><h2>Recent activity</h2></div>{history.length > 0 && <button onClick={onViewAll}>View all <ChevronRight size={14} /></button>}</div>
+        {history.length > 0 ? <div className="activity-list">
+          {history.slice(0, 3).map((item) => <button className="activity-row activity-button" key={item.timestamp} onClick={() => runCommand(item.query)}><span className="file-icon"><Search size={17} /></span><span className="activity-copy"><strong>{item.query}</strong><small>Search · {item.resultCount} result{item.resultCount === 1 ? "" : "s"}</small></span><time>{formatTime(item.timestamp / 1000)}</time><ChevronRight size={15} /></button>)}
+        </div> : <div className="activity-empty">Your completed local searches will appear here.</div>}
       </section>
     </div>
   );
@@ -231,7 +220,7 @@ function SearchView({ query, setQuery, runCommand, submittedQuery, loading, resu
       <header className="page-header"><span className="section-kicker">LOCAL SEARCH</span><h1>Find anything.</h1><p>Search Documents, Desktop, and Downloads without sending filenames anywhere.</p></header>
       <div className="wide-search"><Search size={20} /><input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") runCommand(); }} placeholder="Try “find my latest project brief”" autoFocus /><button onClick={() => runCommand()}>{loading ? <LoaderCircle className="spin" size={17} /> : "Search"}</button></div>
       {error && <div className="error-banner">{error}</div>}
-      {submittedQuery && !loading && <div className="result-summary"><span>{results.length} results for <strong>“{extractSearchTerms(submittedQuery) || submittedQuery}”</strong></span><span>{searchMeta.scanned.toLocaleString()} files scanned in {searchMeta.elapsedMs}ms{searchMeta.truncated ? " · scan limit reached" : ""}</span></div>}
+      {submittedQuery && !loading && !error && <div className="result-summary"><span>{results.length} results for <strong>“{extractSearchTerms(submittedQuery) || submittedQuery}”</strong></span><span>{searchMeta.scanned.toLocaleString()} files scanned in {searchMeta.elapsedMs}ms{searchMeta.truncated ? " · scan limit reached" : ""}</span></div>}
       <div className="results-list">
         {loading && <SearchSkeleton />}
         {!loading && results.map((result, index) => <ResultRow key={result.id} result={result} selected={selected === index} onSelect={() => setSelected(index)} />)}
@@ -282,10 +271,6 @@ function ToggleRow({ row, checked, onChange }: { row: { title: string; detail: s
   return <div className="setting-row"><div><strong>{row.title}</strong><span>{row.detail}</span></div><button role="switch" aria-checked={checked} className={`toggle ${checked ? "on" : ""}`} onClick={onChange}><span /></button></div>;
 }
 
-function ComingSoon({ icon: Icon, title, description }: { icon: typeof Zap; title: string; description: string }) {
-  return <div className="coming-view page-enter"><div className="coming-orbit"><span /><Icon size={32} /></div><span className="section-kicker">PLANNED FOR MILESTONE 2</span><h1>{title}</h1><p>{description}</p><div className="coming-note"><Keyboard size={16} /> The command center already recognizes these requests and routes them here.</div></div>;
-}
-
 function EmptyState({ icon: Icon, title, detail }: { icon: typeof Search; title: string; detail: string }) { return <div className="empty-state"><span><Icon size={23} /></span><strong>{title}</strong><p>{detail}</p></div>; }
 function SearchSkeleton() { return <>{[1, 2, 3, 4].map((item) => <div className="result-row skeleton" key={item}><span /><div><i /><i /></div></div>)}</>; }
 
@@ -296,7 +281,7 @@ function assistantResponse(intent: ReturnType<typeof classifyIntent>, results: S
   return <p>I can search local files in this alpha build. Try asking me to find a document, project, image, or download.</p>;
 }
 
-function viewLabel(view: View) { return nav.find((item) => item.view === view)?.label ?? "Settings"; }
+function viewLabel(view: View) { return view === "assistant" ? "Command response" : nav.find((item) => item.view === view)?.label ?? "Settings"; }
 function formatSize(bytes: number) { if (!bytes) return "—"; if (bytes < 1024) return `${bytes} B`; if (bytes < 1_048_576) return `${Math.round(bytes / 1024)} KB`; return `${(bytes / 1_048_576).toFixed(1)} MB`; }
 function formatTime(seconds: number) { const date = new Date(seconds * 1000); const delta = Date.now() - date.getTime(); if (delta < 3_600_000) return `${Math.max(1, Math.round(delta / 60_000))}m ago`; if (delta < 86_400_000) return `${Math.round(delta / 3_600_000)}h ago`; return date.toLocaleDateString(undefined, { month: "short", day: "numeric" }); }
 function loadJson<T>(key: string, fallback: T): T { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) as T : fallback; } catch { return fallback; } }
