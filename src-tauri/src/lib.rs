@@ -41,7 +41,19 @@ struct ScanState {
 }
 
 #[tauri::command]
-fn search_files(
+async fn search_files(
+    query: String,
+    locations: Vec<String>,
+    include_hidden: bool,
+) -> Result<SearchResponse, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        search_files_blocking(query, locations, include_hidden)
+    })
+    .await
+    .map_err(|error| format!("The local search worker stopped unexpectedly: {error}"))?
+}
+
+fn search_files_blocking(
     query: String,
     locations: Vec<String>,
     include_hidden: bool,

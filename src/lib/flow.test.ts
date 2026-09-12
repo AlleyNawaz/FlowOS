@@ -11,4 +11,9 @@ describe("command intent routing", () => {
     expect(classifyIntent("Clean my downloads folder")).toBe("organize");
     expect(classifyIntent("Prepare tomorrow's schedule")).toBe("schedule");
   });
+
+  it("treats recency words as ranking signals instead of filename terms", () => {
+    expect(extractSearchTerms("Find my latest project brief")).toBe("project brief");
+    expect(extractSearchTerms("show the most recent tax document")).toBe("tax");
+  });
 });

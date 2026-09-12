@@ -57,7 +57,7 @@ export function classifyIntent(query: string): "search" | "summarize" | "organiz
 
 export function extractSearchTerms(query: string): string {
   return query
-    .replace(/\b(please|can you|could you|find|show me|show|where is|locate|search for|my|the|a|an|file|document)\b/gi, " ")
+    .replace(/\b(please|can you|could you|find|show me|show|where is|locate|search for|my|the|a|an|file|document|latest|newest|most recent|recently|recent)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
