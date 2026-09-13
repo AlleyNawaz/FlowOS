@@ -1,28 +1,133 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="810" viewBox="0 0 1440 810" role="img" aria-labelledby="title description">
-  <title id="title">FlowOS command center</title>
-  <desc id="description">Dark desktop interface with navigation, a local file search command bar, search suggestions, and an empty recent activity state.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
+  <title id="title">FlowOS home screen</title>
+  <desc id="description">FlowOS desktop interface with a translucent sidebar, natural-language command bar, local search shortcuts, and private recent activity.</desc>
   <defs>
-    <radialGradient id="glow" cx="72%" cy="14%" r="54%"><stop offset="0" stop-color="#1c3326" stop-opacity="0.72"/><stop offset="1" stop-color="#0b0d0c" stop-opacity="0"/></radialGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dcffe9"/><stop offset="1" stop-color="#75e6aa"/></linearGradient>
-    <filter id="shadow" x="-30%" y="-50%" width="160%" height="220%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000000" flood-opacity="0.42"/></filter>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#0d0e15"/>
+      <stop offset="0.55" stop-color="#090a10"/>
+      <stop offset="1" stop-color="#0d1018"/>
+    </linearGradient>
+    <radialGradient id="aurora" cx="65%" cy="0%" r="70%">
+      <stop stop-color="#6257b1" stop-opacity="0.22"/>
+      <stop offset="0.7" stop-color="#26223f" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#090a10" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sidebar" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#191a23" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#101119" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c7bcff"/>
+      <stop offset="0.56" stop-color="#897be8"/>
+      <stop offset="1" stop-color="#5a53a5"/>
+    </linearGradient>
+    <linearGradient id="command" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#282936" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#181921" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="active" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#ab9aff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#8e82d4" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-60%" width="160%" height="240%">
+      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+    <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#5d4fc2" flood-opacity="0.28"/>
+    </filter>
   </defs>
-  <rect width="1440" height="810" rx="22" fill="#0b0d0c"/><rect x="224" width="1216" height="810" fill="url(#glow)"/><rect width="224" height="810" rx="22" fill="#0e110f"/><path d="M224 0v810M224 57h1216" stroke="#fff" stroke-opacity="0.075"/>
-  <rect x="22" y="20" width="34" height="34" rx="10" fill="url(#mark)"/><path d="M32 29h15M32 29v17M32 37h11" fill="none" stroke="#102017" stroke-width="3.2" stroke-linecap="round"/><text x="67" y="43" fill="#edf2ee" font-family="Arial,sans-serif" font-size="17" font-weight="700">FlowOS</text><rect x="164" y="28" width="39" height="18" rx="4" fill="none" stroke="#fff" stroke-opacity="0.12"/><text x="171" y="40" fill="#778079" font-family="monospace" font-size="8">ALPHA</text>
-  <rect x="18" y="74" width="188" height="38" rx="8" fill="#171a18" stroke="#fff" stroke-opacity="0.08"/><circle cx="35" cy="93" r="5" fill="none" stroke="#8c958f" stroke-width="1.4"/><path d="M39 97l4 4" stroke="#8c958f" stroke-width="1.4"/><text x="51" y="97" fill="#aab1ac" font-family="Arial,sans-serif" font-size="11">Quick open</text><rect x="167" y="84" width="28" height="18" rx="4" fill="#fff" fill-opacity="0.04" stroke="#fff" stroke-opacity="0.08"/><text x="173" y="97" fill="#7e8781" font-family="monospace" font-size="9">⌘ K</text>
-  <rect x="14" y="132" width="196" height="38" rx="8" fill="#1b1e1c"/><g fill="#75e6aa"><rect x="28" y="145" width="5" height="5" rx="1"/><rect x="36" y="145" width="5" height="5" rx="1"/><rect x="28" y="153" width="5" height="5" rx="1"/><rect x="36" y="153" width="5" height="5" rx="1"/></g><text x="52" y="156" fill="#e6ebe7" font-family="Arial,sans-serif" font-size="11" font-weight="600">Command center</text>
-  <circle cx="35" cy="193" r="6" fill="none" stroke="#858d88" stroke-width="1.3"/><path d="M39 198l4 4" stroke="#858d88"/><text x="52" y="198" fill="#858d88" font-family="Arial,sans-serif" font-size="11">Search</text><circle cx="35" cy="239" r="7" fill="none" stroke="#858d88" stroke-width="1.3"/><path d="M35 235v5l3 2" fill="none" stroke="#858d88"/><text x="52" y="244" fill="#858d88" font-family="Arial,sans-serif" font-size="11">Recents</text>
-  <rect x="18" y="674" width="188" height="50" rx="9" fill="#75e6aa" fill-opacity="0.035" stroke="#75e6aa" stroke-opacity="0.15"/><path d="M31 689l6-3 6 3v6c0 5-6 8-6 8s-6-3-6-8z" fill="none" stroke="#75e6aa"/><text x="51" y="693" fill="#c6ccc8" font-family="Arial,sans-serif" font-size="9" font-weight="600">Private by design</text><text x="51" y="708" fill="#69716c" font-family="Arial,sans-serif" font-size="8">Your files stay on this device.</text>
-  <path d="M0 750h224" stroke="#fff" stroke-opacity="0.075"/><circle cx="35" cy="780" r="11" fill="#262b27"/><text x="29" y="783" fill="#cbd1cd" font-family="monospace" font-size="7">AN</text><text x="53" y="777" fill="#cbd1cd" font-family="Arial,sans-serif" font-size="9" font-weight="600">Personal workspace</text><text x="53" y="791" fill="#69716c" font-family="Arial,sans-serif" font-size="8">Local mode</text>
-  <text x="252" y="35" fill="#9fa7a1" font-family="Arial,sans-serif" font-size="10" font-weight="600">Command center</text><circle cx="1306" cy="29" r="3" fill="#75e6aa"/><text x="1316" y="33" fill="#707873" font-family="monospace" font-size="8">LOCAL READY</text>
-  <g transform="translate(224)">
-    <path d="M485 144h20" stroke="#75e6aa"/><text x="515" y="148" fill="#7f8882" font-family="monospace" font-size="9" letter-spacing="2">YOUR DIGITAL COMMAND CENTER</text><text x="401" y="208" fill="#eef2ef" font-family="Arial,sans-serif" font-size="46" font-weight="600">What do you need</text><text x="499" y="260" fill="#b8f5d4" font-family="Arial,sans-serif" font-size="46" font-weight="600">to find?</text><text x="448" y="295" fill="#89918c" font-family="Arial,sans-serif" font-size="13">Find local files quickly, without breaking your flow.</text>
-    <rect x="300" y="335" width="616" height="78" rx="13" fill="#171a18" stroke="#75e6aa" stroke-opacity="0.44" filter="url(#shadow)"/><path d="M326 358l3-9 3 9 9 3-9 3-3 9-3-9-9-3z" fill="none" stroke="#75e6aa" stroke-width="1.5"/><text x="353" y="366" fill="#737b76" font-family="Arial,sans-serif" font-size="12">Search files or enter a command...</text><rect x="866" y="347" width="37" height="37" rx="8" fill="#b8f5d4"/><path d="M885 375v-17m0 0l-7 7m7-7l7 7" fill="none" stroke="#122018" stroke-width="2" stroke-linecap="round"/><path d="M300 387h616" stroke="#fff" stroke-opacity="0.07"/><text x="318" y="402" fill="#606863" font-family="monospace" font-size="8">PRESS ENTER TO RUN</text><text x="730" y="402" fill="#606863" font-family="monospace" font-size="8">PRIVATE ON THIS DEVICE</text>
-    <g font-family="Arial,sans-serif">
-      <rect x="300" y="426" width="302" height="52" rx="9" fill="#161917" stroke="#fff" stroke-opacity="0.08"/><rect x="312" y="436" width="32" height="32" rx="7" fill="#62a6ed" fill-opacity="0.12"/><text x="322" y="457" fill="#95c8ff" font-size="16">⌕</text><text x="355" y="447" fill="#dce2de" font-size="10" font-weight="600">Find a file</text><text x="355" y="463" fill="#707873" font-size="8">Find my latest project brief</text><text x="585" y="457" fill="#59615c" font-size="16">›</text>
-      <rect x="614" y="426" width="302" height="52" rx="9" fill="#161917" stroke="#fff" stroke-opacity="0.08"/><rect x="626" y="436" width="32" height="32" rx="7" fill="#9b68e8" fill-opacity="0.12"/><circle cx="642" cy="452" r="7" fill="none" stroke="#c7a5ff"/><path d="M642 448v5l3 2" fill="none" stroke="#c7a5ff"/><text x="669" y="447" fill="#dce2de" font-size="10" font-weight="600">Recent work</text><text x="669" y="463" fill="#707873" font-size="8">Find recent project files</text><text x="899" y="457" fill="#59615c" font-size="16">›</text>
-      <rect x="300" y="488" width="302" height="52" rx="9" fill="#161917" stroke="#fff" stroke-opacity="0.08"/><rect x="312" y="498" width="32" height="32" rx="7" fill="#e2a64a" fill-opacity="0.12"/><path d="M321 507h14v14h-14zM325 504h14v14" fill="none" stroke="#efc37f"/><text x="355" y="509" fill="#dce2de" font-size="10" font-weight="600">Project files</text><text x="355" y="525" fill="#707873" font-size="8">Find FlowOS project files</text><text x="585" y="519" fill="#59615c" font-size="16">›</text>
-      <rect x="614" y="488" width="302" height="52" rx="9" fill="#161917" stroke="#fff" stroke-opacity="0.08"/><rect x="626" y="498" width="32" height="32" rx="7" fill="#75e6aa" fill-opacity="0.10"/><rect x="634" y="506" width="16" height="15" rx="2" fill="none" stroke="#75e6aa"/><path d="M636 518l4-4 3 3 2-2 3 3" fill="none" stroke="#75e6aa"/><text x="669" y="509" fill="#dce2de" font-size="10" font-weight="600">Images</text><text x="669" y="525" fill="#707873" font-size="8">Find Desktop images</text><text x="899" y="519" fill="#59615c" font-size="16">›</text>
+
+  <rect width="1440" height="900" rx="24" fill="url(#background)"/>
+  <rect x="238" width="1202" height="900" rx="24" fill="url(#aurora)"/>
+  <rect width="238" height="900" rx="24" fill="url(#sidebar)"/>
+  <path d="M238 0v900M238 56h1202" stroke="#fff" stroke-opacity="0.075"/>
+
+  <g transform="translate(20 18)">
+    <rect width="32" height="32" rx="10" fill="url(#mark)" filter="url(#soft-shadow)"/>
+    <g fill="#fff" fill-opacity="0.88">
+      <path d="M7 7h8v8H7z" rx="5"/>
+      <path d="M17 7h8v8h-8z"/>
+      <path d="M17 17h8v8h-8z"/>
+      <path d="M7 17h8v8H7z"/>
     </g>
-    <text x="228" y="626" fill="#79817c" font-family="monospace" font-size="8" letter-spacing="1.5">PICK UP WHERE YOU LEFT OFF</text><text x="228" y="651" fill="#e6ebe7" font-family="Arial,sans-serif" font-size="17" font-weight="600">Recent activity</text><path d="M228 667h760M228 730h760" stroke="#fff" stroke-opacity="0.075"/><text x="463" y="703" fill="#626a65" font-family="Arial,sans-serif" font-size="10">Your completed local searches will appear here.</text>
+    <circle cx="16" cy="16" r="3" fill="#fff"/>
+  </g>
+  <text x="62" y="37" fill="#f3f2f7" font-family="Arial,sans-serif" font-size="15" font-weight="700">FlowOS</text>
+  <text x="62" y="50" fill="#dfe1ea" fill-opacity="0.38" font-family="Arial,sans-serif" font-size="8">Personal intelligence</text>
+  <rect x="181" y="26" width="37" height="17" rx="5" fill="none" stroke="#fff" stroke-opacity="0.09"/>
+  <text x="188" y="38" fill="#ddd8f5" fill-opacity="0.48" font-family="Arial,sans-serif" font-size="7" font-weight="700">ALPHA</text>
+
+  <rect x="13" y="74" width="212" height="40" rx="10" fill="#fff" fill-opacity="0.04" stroke="#fff" stroke-opacity="0.09"/>
+  <circle cx="31" cy="94" r="6" fill="none" stroke="#dadce5" stroke-opacity="0.55" stroke-width="1.5"/>
+  <path d="M35.5 98.5l4 4" stroke="#dadce5" stroke-opacity="0.55" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="49" y="98" fill="#e6e7ec" fill-opacity="0.66" font-family="Arial,sans-serif" font-size="10">Search or ask</text>
+  <rect x="179" y="85" width="16" height="18" rx="5" fill="#fff" fill-opacity="0.045" stroke="#fff" stroke-opacity="0.08"/>
+  <rect x="198" y="85" width="16" height="18" rx="5" fill="#fff" fill-opacity="0.045" stroke="#fff" stroke-opacity="0.08"/>
+  <text x="182" y="98" fill="#e2e3ea" fill-opacity="0.48" font-family="Arial,sans-serif" font-size="9">⌘</text>
+  <text x="203" y="98" fill="#e2e3ea" fill-opacity="0.48" font-family="Arial,sans-serif" font-size="8">K</text>
+
+  <text x="22" y="153" fill="#dfe1ea" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="1">WORKSPACE</text>
+  <rect x="13" y="166" width="212" height="40" rx="9" fill="url(#active)" stroke="#c0b4ff" stroke-opacity="0.12"/>
+  <g fill="#c0b4ff"><rect x="24" y="178" width="5" height="5" rx="1"/><rect x="32" y="178" width="5" height="5" rx="1"/><rect x="24" y="186" width="5" height="5" rx="1"/><rect x="32" y="186" width="5" height="5" rx="1"/></g>
+  <rect x="223" y="177" width="2" height="19" rx="1" fill="#bdadff"/>
+  <text x="48" y="191" fill="#f4f3ff" font-family="Arial,sans-serif" font-size="11" font-weight="600">Home</text>
+  <circle cx="31" cy="231" r="6" fill="none" stroke="#e2e4eb" stroke-opacity="0.42" stroke-width="1.4"/><path d="M35 235l4 4" stroke="#e2e4eb" stroke-opacity="0.42"/>
+  <text x="48" y="235" fill="#e3e6ed" fill-opacity="0.48" font-family="Arial,sans-serif" font-size="10">Search</text>
+  <circle cx="31" cy="276" r="7" fill="none" stroke="#e2e4eb" stroke-opacity="0.42" stroke-width="1.3"/><path d="M31 272v5l3 2" fill="none" stroke="#e2e4eb" stroke-opacity="0.42"/>
+  <text x="48" y="280" fill="#e3e6ed" fill-opacity="0.48" font-family="Arial,sans-serif" font-size="10">Recents</text>
+
+  <rect x="13" y="732" width="212" height="54" rx="11" fill="#73c9a4" fill-opacity="0.04" stroke="#8fe3c1" stroke-opacity="0.11"/>
+  <rect x="23" y="744" width="27" height="27" rx="8" fill="#75cea9" fill-opacity="0.08"/>
+  <path d="M31 751l6-3 6 3v5c0 5-6 8-6 8s-6-3-6-8z" fill="none" stroke="#8cd8bb" stroke-width="1.2"/>
+  <text x="59" y="753" fill="#e8f2ee" fill-opacity="0.76" font-family="Arial,sans-serif" font-size="9" font-weight="600">Private on this Mac</text>
+  <text x="59" y="768" fill="#ccded6" fill-opacity="0.38" font-family="Arial,sans-serif" font-size="7.5">Your files never leave your device.</text>
+  <path d="M13 836h212" stroke="#fff" stroke-opacity="0.075"/>
+  <circle cx="34" cy="863" r="14" fill="#403c52" stroke="#fff" stroke-opacity="0.1"/>
+  <text x="26" y="867" fill="#f5f4ff" fill-opacity="0.82" font-family="Arial,sans-serif" font-size="8" font-weight="600">AN</text>
+  <text x="56" y="859" fill="#f1f1f5" fill-opacity="0.76" font-family="Arial,sans-serif" font-size="9" font-weight="600">Personal workspace</text>
+  <text x="56" y="873" fill="#dfe1ea" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="8">On-device</text>
+
+  <text x="266" y="35" fill="#dfe1e8" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="9">FlowOS</text>
+  <text x="306" y="35" fill="#dfe1e8" fill-opacity="0.18" font-family="Arial,sans-serif" font-size="11">›</text>
+  <text x="320" y="35" fill="#ebecef" fill-opacity="0.6" font-family="Arial,sans-serif" font-size="9" font-weight="600">Home</text>
+  <rect x="1282" y="17" width="129" height="27" rx="14" fill="#fff" fill-opacity="0.025" stroke="#fff" stroke-opacity="0.06"/>
+  <circle cx="1298" cy="30.5" r="3" fill="#82d5b4"/>
+  <text x="1308" y="34" fill="#d1ded9" fill-opacity="0.5" font-family="Arial,sans-serif" font-size="8">Local engine ready</text>
+
+  <g transform="translate(238)">
+    <g transform="translate(586 131)">
+      <rect width="54" height="54" rx="18" fill="#9b8eea" fill-opacity="0.08" stroke="#cbc2ff" stroke-opacity="0.13"/>
+      <rect x="11" y="11" width="32" height="32" rx="10" fill="url(#mark)" filter="url(#soft-shadow)"/>
+      <g fill="#fff" fill-opacity="0.88"><rect x="18" y="18" width="8" height="8"/><rect x="28" y="18" width="8" height="8"/><rect x="28" y="28" width="8" height="8"/><rect x="18" y="28" width="8" height="8"/></g>
+      <circle cx="27" cy="27" r="3" fill="#fff"/>
+    </g>
+    <text x="510" y="211" fill="#c7c0eb" fill-opacity="0.49" font-family="Arial,sans-serif" font-size="9" font-weight="600">Your calm space to get things done</text>
+    <text x="364" y="278" fill="#f5f4f8" font-family="Arial,sans-serif" font-size="48" font-weight="600" letter-spacing="-2">Everything you need,</text>
+    <text x="394" y="334" fill="#bdb2ed" font-family="Arial,sans-serif" font-size="48" font-weight="600" letter-spacing="-2">one thought away.</text>
+    <text x="435" y="374" fill="#dee0e8" fill-opacity="0.42" font-family="Arial,sans-serif" font-size="12">Find files and move through your work without losing focus.</text>
+
+    <rect x="276" y="414" width="674" height="94" rx="17" fill="url(#command)" stroke="#c9bdff" stroke-opacity="0.35" filter="url(#shadow)"/>
+    <path d="M308 438l3-8 3 8 8 3-8 3-3 8-3-8-8-3z" fill="none" stroke="#b8aaff" stroke-width="1.5"/>
+    <text x="338" y="447" fill="#e4e5eb" fill-opacity="0.3" font-family="Arial,sans-serif" font-size="12">What would you like to find?</text>
+    <rect x="899" y="427" width="38" height="38" rx="11" fill="#b8a8ff" stroke="#fff" stroke-opacity="0.28"/>
+    <path d="M918 454v-16m0 0l-7 7m7-7l7 7" fill="none" stroke="#29243a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M276 477h674" stroke="#fff" stroke-opacity="0.06"/>
+    <text x="296" y="496" fill="#dfe1ea" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="8">⌘  ENTER TO SEARCH</text>
+    <text x="809" y="496" fill="#dfe1ea" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="8">PRIVATE AND ON-DEVICE</text>
+
+    <g font-family="Arial,sans-serif">
+      <g transform="translate(276 522)"><rect width="162" height="59" rx="13" fill="#fff" fill-opacity="0.024" stroke="#fff" stroke-opacity="0.08"/><rect x="10" y="13" width="32" height="32" rx="9" fill="#69a9f1" fill-opacity="0.1"/><text x="20" y="34" fill="#9bc7ff" font-size="16">⌕</text><text x="51" y="27" fill="#f1f1f5" fill-opacity="0.8" font-size="9" font-weight="600">Find a file</text><text x="51" y="42" fill="#dfe1ea" fill-opacity="0.27" font-size="7.5">Across this Mac</text></g>
+      <g transform="translate(446 522)"><rect width="162" height="59" rx="13" fill="#fff" fill-opacity="0.024" stroke="#fff" stroke-opacity="0.08"/><rect x="10" y="13" width="32" height="32" rx="9" fill="#a78bf4" fill-opacity="0.1"/><circle cx="26" cy="29" r="7" fill="none" stroke="#c1b0ff"/><path d="M26 25v5l3 2" fill="none" stroke="#c1b0ff"/><text x="51" y="27" fill="#f1f1f5" fill-opacity="0.8" font-size="9" font-weight="600">Recent work</text><text x="51" y="42" fill="#dfe1ea" fill-opacity="0.27" font-size="7.5">Continue your flow</text></g>
+      <g transform="translate(616 522)"><rect width="162" height="59" rx="13" fill="#fff" fill-opacity="0.024" stroke="#fff" stroke-opacity="0.08"/><rect x="10" y="13" width="32" height="32" rx="9" fill="#dd9e67" fill-opacity="0.1"/><path d="M20 22h12l4 4v11H20zM32 22v5h4" fill="none" stroke="#e9bc94"/><text x="51" y="27" fill="#f1f1f5" fill-opacity="0.8" font-size="9" font-weight="600">Project files</text><text x="51" y="42" fill="#dfe1ea" fill-opacity="0.27" font-size="7.5">Jump into code</text></g>
+      <g transform="translate(786 522)"><rect width="164" height="59" rx="13" fill="#fff" fill-opacity="0.024" stroke="#fff" stroke-opacity="0.08"/><rect x="10" y="13" width="32" height="32" rx="9" fill="#6ccaa3" fill-opacity="0.1"/><rect x="19" y="21" width="15" height="15" rx="2" fill="none" stroke="#91daba"/><path d="M20 34l4-4 3 3 2-2 4 3" fill="none" stroke="#91daba"/><text x="51" y="27" fill="#f1f1f5" fill-opacity="0.8" font-size="9" font-weight="600">Images</text><text x="51" y="42" fill="#dfe1ea" fill-opacity="0.27" font-size="7.5">Browse visually</text></g>
+    </g>
+
+    <text x="231" y="680" fill="#c7c0eb" fill-opacity="0.49" font-family="Arial,sans-serif" font-size="9" font-weight="600">Continue</text>
+    <text x="231" y="704" fill="#f5f5f7" fill-opacity="0.88" font-family="Arial,sans-serif" font-size="16" font-weight="600">Recent activity</text>
+    <rect x="231" y="721" width="764" height="76" rx="14" fill="#fff" fill-opacity="0.018" stroke="#fff" stroke-opacity="0.08"/>
+    <rect x="514" y="742" width="34" height="34" rx="10" fill="#fff" fill-opacity="0.025" stroke="#fff" stroke-opacity="0.08"/>
+    <circle cx="531" cy="759" r="7" fill="none" stroke="#c1bbe0" stroke-opacity="0.4"/><path d="M531 755v5l3 2" fill="none" stroke="#c1bbe0" stroke-opacity="0.4"/>
+    <text x="559" y="754" fill="#efeff3" fill-opacity="0.62" font-family="Arial,sans-serif" font-size="9" font-weight="600">A quiet start</text>
+    <text x="559" y="770" fill="#dfe1ea" fill-opacity="0.27" font-family="Arial,sans-serif" font-size="8">Your recent searches will appear here.</text>
   </g>
 </svg>
